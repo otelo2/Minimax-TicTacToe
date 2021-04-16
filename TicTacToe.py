@@ -6,33 +6,62 @@
 from Board import *
 
 def main():
-    ticTacToe = Board()
-    finished = False
-    turn = "Player"
+    winner = None
+    gameState = "Start"
+    while True:
+        if (gameState == "Start"):
+            ticTacToe = Board()
+            if winner == "Player":
+                turn = "Computer"
+            elif winner == "Computer":
+                turn = "Player"
+            else:
+                turn = "Player"
+            input("Press a key to start\n")
+            gameState = "Play"
+            continue
 
-    while (not finished):
-        if (turn == "Player"):
-            #print("What is your move, player?")
-            currentSymbol = "X"
-            move = int(input("What is your move, player? "))
-            ticTacToe.board[move] = currentSymbol
-            ticTacToe.printBoard()
-            turn = "Computer"
-            finished = ticTacToe.checkWin(currentSymbol)
-            if finished:
-                continue
-        if (turn == "Computer"):
-            #print("What is your move, player?")
-            currentSymbol = "O"
-            move = int(input("What is your move, computer? "))
-            ticTacToe.board[move] = currentSymbol
-            ticTacToe.printBoard()
-            turn = "Player"
-            finished = ticTacToe.checkWin(currentSymbol)
-            if finished:
-                continue
-    
-    print("Thanks for playing")
+        elif (gameState == "Play"):
+            if (turn == "Player"):
+                currentSymbol = "X"
+                move = int(input("What is your move, player? "))
+                ticTacToe.board[move] = currentSymbol
+                ticTacToe.printBoard()
+                turn = "Computer"
+                gameState = ticTacToe.checkWin(currentSymbol)
+                if gameState == "Win":
+                    winner = "Player"
+                    continue
+            if (turn == "Computer"):
+                #print("What is your move, player?")
+                currentSymbol = "O"
+                move = int(input("What is your move, computer? "))
+                ticTacToe.board[move] = currentSymbol
+                ticTacToe.printBoard()
+                turn = "Player"
+                gameState = ticTacToe.checkWin(currentSymbol)
+                if gameState == "Win":
+                    winner = "Computer"
+                    continue
+
+        elif (gameState == "Win"):
+            #smth
+            print(f'{winner} won!')
+            answer = input("Do you want to play again? y/n\n")
+            if (answer == 'y' or answer == 'Y'):
+                gameState = "Start"
+            else:
+                gameState = "End"
+
+        elif (gameState == "End"):
+            #smth
+            print("Thanks for playing!")
+            break
+        else:
+            print("You broke something lol")
+            gameState == "Start"
+            continue
+
 
 if __name__ == "__main__":
     main()

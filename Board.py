@@ -18,27 +18,21 @@ class Board:
     def checkWin(self, currentSymbol):
         #Horizontal top
         if ((self.board[0] == currentSymbol) and (self.board[1] == currentSymbol) and (self.board[2] == currentSymbol)):
-            print("Someone won!")
-            return True
+            return "Win"
         #Vertical left
         elif ((self.board[0] == currentSymbol) and (self.board[3] == currentSymbol) and (self.board[6] == currentSymbol)):
-            print("Someone won!")
-            return True
+            return "Win"
         #Horizontal bottom
         elif ((self.board[6] == currentSymbol) and (self.board[7] == currentSymbol) and (self.board[8] == currentSymbol)):
-            print("Someone won!")
-            return True
+            return "Win"
         #Vertical right
         elif ((self.board[2] == currentSymbol) and (self.board[5] == currentSymbol) and (self.board[8] == currentSymbol)):
-            print("Someone won!")
-            return True
+            return "Win"
         #Diagonal bottom left to top right
         elif ((self.board[6] == currentSymbol) and (self.board[4] == currentSymbol) and (self.board[2] == currentSymbol)):
-            print("Someone won!")
-            return True
+            return "Win"
         #Diagonal top left to bottom right
         elif ((self.board[0] == currentSymbol) and (self.board[4] == currentSymbol) and (self.board[8] == currentSymbol)):
-            print("Someone won!")
-            return True
+            return "Win"
         else:
-            return False
+            return "Play"
