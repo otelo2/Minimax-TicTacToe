@@ -8,6 +8,7 @@ from Board import *
 def main():
     winner = None
     gameState = "Start"
+    Error = False
     while True:
         if (gameState == "Start"):
             ticTacToe = Board()
@@ -24,8 +25,15 @@ def main():
         elif (gameState == "Play"):
             if (turn == "Player"):
                 currentSymbol = "X"
-                move = int(input("What is your move, player? "))
-                ticTacToe.board[move] = currentSymbol
+                #only allow numbers from 0 to 8
+                while True:
+                    try:
+                        move = int(input("What is your move, player? "))
+                        ticTacToe.board[move] = currentSymbol
+                    except IndexError:
+                        print("Please choose a number from 0 to 8")
+                    else:
+                        break
                 ticTacToe.printBoard()
                 turn = "Computer"
                 gameState = ticTacToe.checkWin(currentSymbol)
@@ -35,8 +43,15 @@ def main():
             if (turn == "Computer"):
                 #print("What is your move, player?")
                 currentSymbol = "O"
-                move = int(input("What is your move, computer? "))
-                ticTacToe.board[move] = currentSymbol
+                #only allow numbers from 0 to 8
+                while True:
+                    try:
+                        move = int(input("What is your move, computer? "))
+                        ticTacToe.board[move] = currentSymbol
+                    except IndexError:
+                        print("Please choose a number from 0 to 8")
+                    else:
+                        break
                 ticTacToe.printBoard()
                 turn = "Player"
                 gameState = ticTacToe.checkWin(currentSymbol)
