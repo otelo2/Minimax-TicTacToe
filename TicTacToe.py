@@ -10,6 +10,7 @@ def main():
     gameState = "Start"
     Error = False
     while True:
+        #Starting state
         if (gameState == "Start"):
             ticTacToe = Board()
             if winner == "Player":
@@ -18,51 +19,51 @@ def main():
                 turn = "Player"
             else:
                 turn = "Player"
-            input("Press a key to start\n")
+            input("Press enter to start\n")
             gameState = "Play"
             continue
 
+        #Playing state
         elif (gameState == "Play"):
+            #Assign the correct symbols to each player
             if (turn == "Player"):
                 currentSymbol = "X"
-                #only allow numbers from 0 to 8
-                while True:
-                    try:
-                        move = int(input("What is your move, player? "))
-                        ticTacToe.placeSymbol(move, currentSymbol)
-                    except IndexError:
-                        print("Please choose a number from 0 to 8. \n")
-                    except ValueError:
-                        print("This move has already been done! Choose another space. \n")
-                    else:
-                        break
-                ticTacToe.printBoard()
-                turn = "Computer"
-                gameState = ticTacToe.checkWin(currentSymbol)
-                if gameState == "Win":
-                    winner = "Player"
-                    continue
-            if (turn == "Computer"):
-                #print("What is your move, player?")
+            elif (turn == "Computer"):
                 currentSymbol = "O"
-                #only allow numbers from 0 to 8
-                while True:
-                    try:
-                        move = int(input("What is your move, computer? "))
-                        ticTacToe.placeSymbol(move, currentSymbol)
-                    except IndexError:
-                        print("Please choose a number from 0 to 8. \n")
-                    except ValueError:
-                        print("This move has already been done! Choose another space. \n")
-                    else:
-                        break
-                ticTacToe.printBoard()
-                turn = "Player"
-                gameState = ticTacToe.checkWin(currentSymbol)
-                if gameState == "Win":
-                    winner = "Computer"
-                    continue
 
+            #Here is where the move is performed, plus some error handling
+            while True:
+                try:
+                    move = int(input(f"What is your move, {turn}? "))
+                    ticTacToe.placeSymbol(move, currentSymbol)
+                except IndexError:
+                    #only allow numbers from 0 to 8
+                    print("Please choose a number from 0 to 8. \n")
+                except ValueError:
+                    #Prevent placing a symbol where there is already another one
+                    print("This move has already been done! Choose another space. \n")
+                else:
+                    break
+
+            #Print the board  to the console
+            ticTacToe.printBoard()
+
+            #Check if there has been a winner
+            gameState = ticTacToe.checkWin(currentSymbol)
+            if gameState == "Win":
+                winner = turn
+                continue
+            elif gameState == "Draw":
+                winner = "No one"
+                continue
+            else:
+                #If there is no winner yet,start the next turn
+                if turn == "Computer":
+                    turn = "Player"
+                elif turn == "Player":
+                    turn = "Computer"
+
+        #Win state
         elif (gameState == "Win"):
             #smth
             print(f'{winner} won!')
@@ -71,7 +72,18 @@ def main():
                 gameState = "Start"
             else:
                 gameState = "End"
+        
+        #Draw state
+        elif (gameState == "Draw"):
+            #smth
+            print(f'{winner} won! It\'s a draw!')
+            answer = input("Do you want to play again? y/n\n")
+            if (answer == 'y' or answer == 'Y'):
+                gameState = "Start"
+            else:
+                gameState = "End"
 
+        #end state
         elif (gameState == "End"):
             #smth
             print("Thanks for playing!")

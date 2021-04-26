@@ -36,7 +36,10 @@ class Board:
         elif ((self.board[0] == currentSymbol) and (self.board[4] == currentSymbol) and (self.board[8] == currentSymbol)):
             return "Win"
         else:
-            return "Play"
+            if (self.checkDraw() == "Draw"):
+                return "Draw"
+            else:
+                return "Play"
 
     #Places a X or O in the location specified
     def placeSymbol(self, move, currentSymbol):
@@ -45,3 +48,9 @@ class Board:
             self.board[move] = currentSymbol
         else:
             raise ValueError()
+    
+    #Checks if there has been a draw and restarts the board
+    def checkDraw(self):
+        #Checks if the board is full
+        if ("_" not in self.board):
+            return "Draw"
