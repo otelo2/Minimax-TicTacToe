@@ -5,6 +5,7 @@ class Board:
                     "_", "_", "_",
                     "_", "_", "_"]
     
+    #Print the current state of the board to the screen
     def printBoard(self):
         counter = 0
         for cell in self.board:
@@ -36,3 +37,7 @@ class Board:
             return "Win"
         else:
             return "Play"
+
+    #Places a X or O in the location specified
+    def placeSymbol(self, move, currentSymbol):
+        self.board[move] = currentSymbol

@@ -29,7 +29,7 @@ def main():
                 while True:
                     try:
                         move = int(input("What is your move, player? "))
-                        ticTacToe.board[move] = currentSymbol
+                        ticTacToe.placeSymbol(move, currentSymbol)
                     except IndexError:
                         print("Please choose a number from 0 to 8")
                     else:
@@ -47,7 +47,7 @@ def main():
                 while True:
                     try:
                         move = int(input("What is your move, computer? "))
-                        ticTacToe.board[move] = currentSymbol
+                        ticTacToe.placeSymbol(move, currentSymbol)
                     except IndexError:
                         print("Please choose a number from 0 to 8")
                     else:
