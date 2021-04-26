@@ -4,6 +4,7 @@
 # PlayerVsComputer. The computer is the one making moves via Minimax
 
 from Board import *
+from Colors import *
 
 def main():
     winner = None
@@ -19,7 +20,7 @@ def main():
                 turn = "Player"
             else:
                 turn = "Player"
-            input("Press enter to start\n")
+            input(f"{bcolors.HEADER}Press enter to start\n{bcolors.ENDC}")
             gameState = "Play"
             continue
 
@@ -34,14 +35,14 @@ def main():
             #Here is where the move is performed, plus some error handling
             while True:
                 try:
-                    move = int(input(f"What is your move, {turn}? "))
+                    move = int(input(f"What is your {bcolors.BOLD}move{bcolors.ENDC}, {bcolors.OKGREEN}{turn}{bcolors.ENDC}? "))
                     ticTacToe.placeSymbol(move, currentSymbol)
                 except IndexError:
                     #only allow numbers from 0 to 8
-                    print("Please choose a number from 0 to 8. \n")
+                    print(f"{bcolors.FAIL}Please choose a number from 0 to 8. {bcolors.ENDC}\n")
                 except ValueError:
                     #Prevent placing a symbol where there is already another one
-                    print("This move has already been done! Choose another space. \n")
+                    print(f"{bcolors.FAIL}This move has already been done! Choose another space. {bcolors.ENDC}\n")
                 else:
                     break
 
@@ -66,8 +67,8 @@ def main():
         #Win state
         elif (gameState == "Win"):
             #smth
-            print(f'{winner} won!')
-            answer = input("Do you want to play again? y/n\n")
+            print(f'{bcolors.OKCYAN}{winner} won!{bcolors.ENDC}')
+            answer = input(f"Do you want to play again? {bcolors.OKBLUE}y/n{bcolors.ENDC}\n")
             if (answer == 'y' or answer == 'Y'):
                 gameState = "Start"
             else:
@@ -77,7 +78,7 @@ def main():
         elif (gameState == "Draw"):
             #smth
             print(f'{winner} won! It\'s a draw!')
-            answer = input("Do you want to play again? y/n\n")
+            answer = input(f"Do you want to play again? {bcolors.OKBLUE}y/n{bcolors.ENDC}\n")
             if (answer == 'y' or answer == 'Y'):
                 gameState = "Start"
             else:
@@ -86,7 +87,7 @@ def main():
         #end state
         elif (gameState == "End"):
             #smth
-            print("Thanks for playing!")
+            print(f"{bcolors.WARNING}Thanks for playing!{bcolors.ENDC}")
             break
         else:
             print("You broke something lol")
