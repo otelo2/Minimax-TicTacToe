@@ -31,7 +31,9 @@ def main():
                         move = int(input("What is your move, player? "))
                         ticTacToe.placeSymbol(move, currentSymbol)
                     except IndexError:
-                        print("Please choose a number from 0 to 8")
+                        print("Please choose a number from 0 to 8. \n")
+                    except ValueError:
+                        print("This move has already been done! Choose another space. \n")
                     else:
                         break
                 ticTacToe.printBoard()
@@ -49,7 +51,9 @@ def main():
                         move = int(input("What is your move, computer? "))
                         ticTacToe.placeSymbol(move, currentSymbol)
                     except IndexError:
-                        print("Please choose a number from 0 to 8")
+                        print("Please choose a number from 0 to 8. \n")
+                    except ValueError:
+                        print("This move has already been done! Choose another space. \n")
                     else:
                         break
                 ticTacToe.printBoard()

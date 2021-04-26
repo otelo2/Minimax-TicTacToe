@@ -40,4 +40,8 @@ class Board:
 
     #Places a X or O in the location specified
     def placeSymbol(self, move, currentSymbol):
-        self.board[move] = currentSymbol
+        symbol = self.board[move]
+        if symbol == '_':
+            self.board[move] = currentSymbol
+        else:
+            raise ValueError()
