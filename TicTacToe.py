@@ -12,7 +12,7 @@ def main():
     while True:
         #Starting state
         if (gameState == "Start"):
-            ticTacToe = Board()
+            TicTacToe = Board()
             if winner == "Player":
                 turn = "Computer"
             elif winner == "Computer":
@@ -31,11 +31,39 @@ def main():
             elif (turn == "Computer"):
                 currentSymbol = "O"
 
+            #This section is just for the data that the minimax algorithm needs
+
+            #Initialize variables
+            bestScore = -1000
+            bestMove = 0
+
+            #Initialize Minimax algorithm, start recursion
+            for index, cell in enumerate(TicTacToe.board):
+                #Make hypotetical play in empty cell
+                if cell == "_":
+                    TicTacToe.board[index] = "O"
+                    #Start recursion to find best score
+                    score = TicTacToe.minimax(False)
+                    #Clean the board
+                    TicTacToe.board[index] = "_"
+                    #If a new best score if found, record the value and move
+                    if score > bestScore:
+                        bestScore = score
+                        bestMove = index
+
+            #End of minimax section
+
             #Here is where the move is performed, plus some error handling
             while True:
                 try:
-                    move = int(input(f"\n\nWhat is your {bcolors.BOLD}move{bcolors.ENDC}, {bcolors.OKGREEN}{turn}{bcolors.ENDC}? "))-1
-                    ticTacToe.placeSymbol(move, currentSymbol)
+                    if turn == "Computer":
+                        #Make the computer play the move that Minimax calculated
+                        move = bestMove
+                    else:
+                        #Ask player for its move
+                        move = int(input(f"\nWhat is your {bcolors.BOLD}move{bcolors.ENDC}, {bcolors.OKGREEN}{turn}{bcolors.ENDC}? "))-1
+                    #Play the move that has been given
+                    TicTacToe.placeSymbol(move, currentSymbol)
                 except IndexError:
                     #only allow numbers from 1 to 9
                     print(f"{bcolors.FAIL}Please choose a number from 0 to 8. {bcolors.ENDC}\n")
@@ -46,10 +74,10 @@ def main():
                     break
 
             #Print the board  to the console
-            ticTacToe.printBoard()
+            TicTacToe.printBoard()
 
             #Check if there has been a winner
-            gameState = ticTacToe.checkWin(currentSymbol)
+            gameState = TicTacToe.checkWin(currentSymbol)
             if gameState == "Win":
                 winner = turn
                 continue

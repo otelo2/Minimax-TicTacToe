@@ -14,6 +14,7 @@ class Board:
             counter += 1
             if (counter == 3 or counter == 6):
                 print("\n-+-+-+")
+        print("\n")
 
     #currentSymbol is the one that the current player is placing down
     def checkWin(self, currentSymbol):
@@ -35,8 +36,11 @@ class Board:
         #Diagonal top left to bottom right
         elif ((self.board[0] == currentSymbol) and (self.board[4] == currentSymbol) and (self.board[8] == currentSymbol)):
             return "Win"
-        #Diagonal top left to bottom right
+        #Vertical center
         elif ((self.board[1] == currentSymbol) and (self.board[4] == currentSymbol) and (self.board[7] == currentSymbol)):
+            return "Win"
+        #Horizontal center
+        elif ((self.board[3] == currentSymbol) and (self.board[4] == currentSymbol) and (self.board[5] == currentSymbol)):
             return "Win"
         else:
             if (self.checkDraw() == "Draw"):
@@ -76,17 +80,17 @@ class Board:
             #Initialize with very low value so it gets overriden
             bestScore = -1000
             #Computer maximazing actions
-            counter = 0
-            for cell in self.board:
+            #counter = 0
+            for index, cell in enumerate(self.board):
                 if cell == "_":
                     #Make hypotetical computer play in current empty location
-                    self.board[counter] = "O"
+                    self.board[index] = "O"
                     #Run the minimax algorithm again, now with the hypotetical play
                     score = self.minimax(False)
                     #Return the board to the original state
-                    self.board[counter] = "_"
+                    self.board[index] = "_"
                     #Increment the counter that moves the board (This has a high potential of messing up due to recursion)
-                    counter += 1
+                    #counter += 1
                     #Check if the newfound score is better than our best score
                     if (score > bestScore):
                         bestScore = score
@@ -96,17 +100,17 @@ class Board:
             #Initialize with very low value so it gets overriden
             bestScore = 1000
             #Computer maximazing actions
-            counter = 0
-            for cell in self.board:
+            #counter = 0
+            for index, cell in enumerate(self.board):
                 if cell == "_":
                     #Make hypotetical player play in current empty location
-                    self.board[counter] = "X"
+                    self.board[index] = "X"
                     #Run the minimax algorithm again, now with the hypotetical play
                     score = self.minimax(True)
                     #Return the board to the original state
-                    self.board[counter] = "_"
+                    self.board[index] = "_"
                     #Increment the counter that moves the board (This has a high potential of messing up due to recursion)
-                    counter += 1
+                    #counter += 1
                     #Check if the newfound score is better than our best score
                     if (score < bestScore):
                         bestScore = score
