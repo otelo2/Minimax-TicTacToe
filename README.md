@@ -4,7 +4,7 @@ Simple python Tic Tac Toe game using the minimax algorithm
 ## Features:
 ### Tic-Tac-Toe game on terminal with full game logic
 ### Pretty colors on the terminal
-### Computer AI by the minimax algorithm (pending)
+### Computer AI by the minimax algorithm
 
 ## Usage:
 Clone this repository and run in your terminal:
