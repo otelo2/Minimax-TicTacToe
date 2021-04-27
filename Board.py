@@ -7,13 +7,15 @@ class Board:
 
     #Print the current state of the board to the screen
     def printBoard(self):
-        counter = 0
-        for cell in self.board:
+        for index, cell in enumerate(self.board):
             #First row
-            print(str(cell) + "|", end="")
-            counter += 1
-            if (counter == 3 or counter == 6):
-                print("\n-+-+-+")
+            if index == 2 or index == 5:
+                print(str(cell), end="")
+                print("\n-+-+-")
+            elif index == 8:
+                print(str(cell), end="")
+            else:
+                print(str(cell) + "|", end="")
         print("\n")
 
     #currentSymbol is the one that the current player is placing down

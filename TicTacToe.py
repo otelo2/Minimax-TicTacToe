@@ -61,7 +61,7 @@ def main():
                         move = bestMove
                     else:
                         #Ask player for its move
-                        move = int(input(f"\nWhat is your {bcolors.BOLD}move{bcolors.ENDC}, {bcolors.OKGREEN}{turn}{bcolors.ENDC}? "))-1
+                        move = int(input(f"You are the {currentSymbol}\nWhat is your {bcolors.BOLD}move{bcolors.ENDC}, {bcolors.OKGREEN}{turn}{bcolors.ENDC}? "))-1
                     #Play the move that has been given
                     TicTacToe.placeSymbol(move, currentSymbol)
                 except IndexError:
