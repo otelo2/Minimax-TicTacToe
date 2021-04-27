@@ -12,8 +12,8 @@ class Board:
             #First row
             print(str(cell) + "|", end="")
             counter += 1
-            if (counter == 3 or counter == 6 or counter == 9):
-                print("\n")
+            if (counter == 3 or counter == 6):
+                print("\n-+-+-+")
 
     #currentSymbol is the one that the current player is placing down
     def checkWin(self, currentSymbol):
@@ -34,6 +34,9 @@ class Board:
             return "Win"
         #Diagonal top left to bottom right
         elif ((self.board[0] == currentSymbol) and (self.board[4] == currentSymbol) and (self.board[8] == currentSymbol)):
+            return "Win"
+        #Diagonal top left to bottom right
+        elif ((self.board[1] == currentSymbol) and (self.board[4] == currentSymbol) and (self.board[7] == currentSymbol)):
             return "Win"
         else:
             if (self.checkDraw() == "Draw"):

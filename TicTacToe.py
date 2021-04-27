@@ -9,7 +9,6 @@ from Colors import *
 def main():
     winner = None
     gameState = "Start"
-    Error = False
     while True:
         #Starting state
         if (gameState == "Start"):
@@ -35,10 +34,10 @@ def main():
             #Here is where the move is performed, plus some error handling
             while True:
                 try:
-                    move = int(input(f"What is your {bcolors.BOLD}move{bcolors.ENDC}, {bcolors.OKGREEN}{turn}{bcolors.ENDC}? "))
+                    move = int(input(f"\n\nWhat is your {bcolors.BOLD}move{bcolors.ENDC}, {bcolors.OKGREEN}{turn}{bcolors.ENDC}? "))-1
                     ticTacToe.placeSymbol(move, currentSymbol)
                 except IndexError:
-                    #only allow numbers from 0 to 8
+                    #only allow numbers from 1 to 9
                     print(f"{bcolors.FAIL}Please choose a number from 0 to 8. {bcolors.ENDC}\n")
                 except ValueError:
                     #Prevent placing a symbol where there is already another one
@@ -67,7 +66,7 @@ def main():
         #Win state
         elif (gameState == "Win"):
             #smth
-            print(f'{bcolors.OKCYAN}{winner} won!{bcolors.ENDC}')
+            print(f'\n\n{bcolors.OKCYAN}{winner} won!{bcolors.ENDC}')
             answer = input(f"Do you want to play again? {bcolors.OKBLUE}y/n{bcolors.ENDC}\n")
             if (answer == 'y' or answer == 'Y'):
                 gameState = "Start"
