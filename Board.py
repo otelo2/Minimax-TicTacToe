@@ -53,7 +53,7 @@ class Board:
     #Places a X or O in the location specified
     def placeSymbol(self, move, currentSymbol):
         symbol = self.board[move]
-        if symbol == '_':
+        if symbol == '_' or currentSymbol == "_":
             self.board[move] = currentSymbol
         else:
             raise ValueError()
@@ -86,11 +86,11 @@ class Board:
             for index, cell in enumerate(self.board):
                 if cell == "_":
                     #Make hypotetical computer play in current empty location
-                    self.board[index] = "O"
+                    self.placeSymbol(index, "O")
                     #Run the minimax algorithm again, now with the hypotetical play
                     score = self.minimax(False)
                     #Return the board to the original state
-                    self.board[index] = "_"
+                    self.placeSymbol(index, "_")
                     #Increment the counter that moves the board (This has a high potential of messing up due to recursion)
                     #counter += 1
                     #Check if the newfound score is better than our best score
@@ -106,11 +106,11 @@ class Board:
             for index, cell in enumerate(self.board):
                 if cell == "_":
                     #Make hypotetical player play in current empty location
-                    self.board[index] = "X"
+                    self.placeSymbol(index, "X")
                     #Run the minimax algorithm again, now with the hypotetical play
                     score = self.minimax(True)
                     #Return the board to the original state
-                    self.board[index] = "_"
+                    self.placeSymbol(index, "_")
                     #Increment the counter that moves the board (This has a high potential of messing up due to recursion)
                     #counter += 1
                     #Check if the newfound score is better than our best score

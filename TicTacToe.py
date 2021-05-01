@@ -20,6 +20,7 @@ def main():
             else:
                 turn = "Player"
             input(f"{bcolors.HEADER}Press enter to start\n{bcolors.ENDC}")
+            print("Calculating 255168 possible states...\n")
             gameState = "Play"
             continue
 
@@ -38,15 +39,14 @@ def main():
             bestMove = 0
 
             #Initialize Minimax algorithm, start recursion
-            print("Calculating 255168 possible moves...\n")
             for index, cell in enumerate(TicTacToe.board):
                 #Make hypotetical play in empty cell
                 if cell == "_":
-                    TicTacToe.board[index] = "O"
+                    TicTacToe.placeSymbol(index, "O")
                     #Start recursion to find best score
                     score = TicTacToe.minimax(False)
                     #Clean the board
-                    TicTacToe.board[index] = "_"
+                    TicTacToe.placeSymbol(index, "_")
                     #If a new best score if found, record the value and move
                     if score > bestScore:
                         bestScore = score
