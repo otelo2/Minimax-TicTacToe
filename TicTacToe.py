@@ -38,6 +38,7 @@ def main():
             bestMove = 0
 
             #Initialize Minimax algorithm, start recursion
+            print("Calculating 255168 possible moves...\n")
             for index, cell in enumerate(TicTacToe.board):
                 #Make hypotetical play in empty cell
                 if cell == "_":
